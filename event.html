@@ -11,20 +11,49 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <style>
         body { background-color: #f0f8ff; }
-        .color-box { border-radius: 15px; padding: 20px; color: white; margin-bottom: 20px; min-height: 200px; }
+        .color-box { border-radius: 15px; padding: 40px; color: white; margin-bottom: 20px; min-height: 200px; }
         .today-box { background-color: #28a745; }
         .date-box { background-color: #007bff; }
         .activity-box { background-color: #ffc107; }
-        .activity-item { background-color: rgba(255, 255, 255, 0.2); border-radius: 10px; padding: 10px; margin: 5px 0; }
+        
+        /* Styling for colorful activity boxes */
+        .activity-item {
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Color classes for each activity box */
+        .color-1 { background-color: #ff8a80; }
+        .color-2 { background-color: #ff80ab; }
+        .color-3 { background-color: #ea80fc; }
+        .color-4 { background-color: #b388ff; }
+        .color-5 { background-color: #8c9eff; }
+        .color-6 { background-color: #82b1ff; }
+        .color-7 { background-color: #80d8ff; }
+        .color-8 { background-color: #a7ffeb; }
+        .color-9 { background-color: #b9f6ca; }
+        .color-10 { background-color: #ccff90; }
+
+        /* Container for bullet points */
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            color: white;
+            font-weight: normal;
+        }
+    
         h2 { color: #343a40; }
     </style>
 </head>
 
 <body>
     <div class="container text-center mt-5">
-        <h1>Activity Journal</h1>
+        <h1>EVENTS CREATER</h1>
         <div class="color-box activity-box">
-            <h2>Save New Activity</h2>
+            <h2>CREATE New Activity</h2>
             <input type="text" id="activityInput" class="form-control" placeholder="Enter activity">
             <input type="text" id="activityDate" class="form-control mt-2" placeholder="Select date" readonly>
             <button id="saveActivity" class="btn btn-light mt-3">Save Activity</button>
