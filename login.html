@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: url('https://t4.ftcdn.net/jpg/02/56/10/07/360_F_256100731_qNLp6MQ3FjYtA3Freu9epjhsAj2cwU9c.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .form-control {
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .btn-primary {
+            border-radius: 25px;
+            background-color: #007bff;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            color: #f8d7da;
+            margin-top: 10px;
+        }
+        @media (min-width: 992px) {
+            .login-container {
+                width: 50%; /* Increase width on larger screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container mt-5">
+        <h1 class="text-center">Login</h1>
+        <input type="email" id="username" class="form-control mt-3" placeholder="Enter email" required>
+        <input type="password" id="password" class="form-control mt-2" placeholder="Enter password" required>
+        <button id="login" class="btn btn-primary mt-3 btn-block">Login <i class="fas fa-sign-in-alt"></i></button>
+        <p id="message" class="message text-center"></p>
+        <p class="text-center">Don't have an account? <a href="register.html" class="text-primary">Register here</a></p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCCsRWWv4ho-NYzAUKriynUAKIqh6zIXs4",
+            authDomain: "event-creater-d980b.firebaseapp.com",
+            projectId: "event-creater-d980b",
+            storageBucket: "event-creater-d980b.appspot.com",
+            messagingSenderId: "215061820955",
+            appId: "1:215061820955:web:848f0b9396500d26d6eabe",
+            measurementId: "G-4L1PPSCYXT"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // User Login
+        document.getElementById("login").addEventListener("click", () => {
+            const email = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Clear previous messages
+            document.getElementById("message").innerText = "";
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Successfully logged in
+                    console.log("Login successful", userCredential);
+                    localStorage.setItem("loggedIn", "true"); // Set login flag
+                    window.location.href = "event.html"; // Redirect to Activity Journal page
+                })
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    console.error("Login failed", error);
+                    document.getElementById("message").innerText = errorMessage;
+                });
+        });
+    </script>
+</body>
+</html>
+

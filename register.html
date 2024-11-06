@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: url('https://your-adobe-stock-image-url.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .register-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .form-control {
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .btn-primary {
+            border-radius: 25px;
+            background-color: #007bff;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            color: #f8d7da;
+            margin-top: 10px;
+        }
+        @media (min-width: 992px) {
+            .register-container {
+                width: 50%; /* Increase width on larger screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container mt-5">
+        <h1 class="text-center">Create Account</h1>
+        <input type="email" id="email" class="form-control mt-3" placeholder="Enter email" required>
+        <input type="password" id="password" class="form-control mt-2" placeholder="Enter password" required>
+        <button id="register" class="btn btn-primary mt-3 btn-block">Register <i class="fas fa-user-plus"></i></button>
+        <p id="message" class="message text-center"></p>
+        <p class="text-center">Already have an account? <a href="login.html" class="text-primary">Login here</a></p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCCsRWWv4ho-NYzAUKriynUAKIqh6zIXs4",
+            authDomain: "event-creater-d980b.firebaseapp.com",
+            projectId: "event-creater-d980b",
+            storageBucket: "event-creater-d980b.appspot.com",
+            messagingSenderId: "215061820955",
+            appId: "1:215061820955:web:848f0b9396500d26d6eabe",
+            measurementId: "G-4L1PPSCYXT"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Register new user
+        document.getElementById("register").addEventListener("click", () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Successfully registered
+                    document.getElementById("message").innerText = "User registered successfully!";
+                    // Optionally redirect to login or other page
+                    // window.location.href = "login.html";
+                })
+                .catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    document.getElementById("message").innerText = errorMessage;
+                });
+        });
+    </script>
+</body>
+</html>
+
